@@ -6,18 +6,14 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'lib'),
     filename: 'scroll-progress.min.js',
-    libraryTarget: 'umd',
-    library: 'ScrollProgress'
+    libraryTarget: 'umd'
   },
   module: {
     rules: [{
       test: /\.(js)$/,
       exclude: /(node_modules)/,
       use: {
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env']
-        }
+        loader: 'babel-loader'
       }
     }]
   },

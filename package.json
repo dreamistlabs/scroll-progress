@@ -7,7 +7,8 @@
     "test": "mocha -R spec test/* --require babel-register",
     "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/* --require babel-register",
     "build": "webpack",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "watch": "webpack --watch"
   },
   "author": "Johnny Hu <johnny@dreamistlabs.com>",
   "license": "MIT",
