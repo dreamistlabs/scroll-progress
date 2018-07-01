@@ -1,0 +1,5 @@
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Continuous integration config
+.travis.yml

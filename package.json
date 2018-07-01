@@ -1,0 +1,25 @@
+{
+  "name": "scroll-progress",
+  "version": "0.0.1",
+  "description": "A progress bar showing you how far you've scrolled on a page",
+  "main": "./src/scroll-progress.js",
+  "scripts": {
+    "test": "mocha -R spec test/* --require babel-register",
+    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/* --require babel-register",
+    "build": "webpack",
+    "prepublishOnly": "npm run build"
+  },
+  "author": "Johnny Hu <johnny@dreamistlabs.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.0.2",
+    "coveralls": "^3.0.2",
+    "istanbul": "^1.0.0-alpha",
+    "mocha": "^5.2.0",
+    "webpack": "^3.10.0"
+  }
+}
