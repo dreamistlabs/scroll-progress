@@ -1,13 +1,30 @@
-import {
-  containerStyles,
-  fillStyles
-} from './lib/cssStyles';
+import { containerStyles, fillStyles } from './lib/cssStyles';
+
+function validateParameters(params) {
+  if (!params.selector) {
+    throw new ReferenceError(
+      'The selector argument cannot be empty or undefined and must be a valid CSS selector'
+    );
+  }
+  if (typeof params.selector !== 'string') {
+    throw new TypeError(
+      'The selector argument must be a string and a valid CSS selector'
+    );
+  }
+  if (params.options && typeof params.options !== 'object') {
+    throw new TypeError('The options argument must be an object');
+  }
+
+  return [params.selector, params.options];
+}
 
 export class ScrollProgress {
   constructor(selector, options) {
     console.log('//scroll-progress v0.0.1');
-    this.selector = selector;
-    this.options = options;
+    [this.selector, this.options] = validateParameters({
+      selector: selector,
+      options: options
+    });
     this.element = queryElement(this.selector);
     this.elementHeight = this.element.offsetHeight;
     this.elementWidth = this.element.offsetWidth;
@@ -43,28 +60,23 @@ export class ScrollProgress {
 
     function queryElement(selector) {
       if (!document.querySelector(selector)) {
-        throw new ReferenceError()
+        throw new ReferenceError();
       }
-      return document.querySelector(selector)
+      return document.querySelector(selector);
     }
 
     function updateProgress(object) {
       //--TODO: option for height vs width (vertical vs horizontal)
-      object.progress = (window.scrollY / (object.elementHeight - object.windowHeight)) * 100;
+      object.progress =
+        (window.scrollY / (object.elementHeight - object.windowHeight)) * 100;
       object.progressBar.firstChild.style.width = object.progress + '%';
-      console.log(object.elementHeight, window.innerHeight, object.windowHeight, window.scrollY, object.progress);
-    }
-
-    function validateParameters() {
-      if (this.selector) {
-        throw new ReferenceError();
-      }
-      if (typeof selector !== 'string') {
-        throw new TypeError();
-      }
-      if (options && typeof options !== 'object') {
-        throw new TypeError();
-      }
+      // console.log(
+      //   object.elementHeight,
+      //   window.innerHeight,
+      //   object.windowHeight,
+      //   window.scrollY,
+      //   object.progress
+      // );
     }
 
     (function initialize(object) {
