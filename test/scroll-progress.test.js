@@ -6,6 +6,8 @@ const defaultCSSHeight = '6px';
 const defaultCSSPosition = 'fixed';
 const defaultCSSTop = '0px';
 const defaultCSSWidth = '100%';
+const defaultCSSBackgroundColor = 'skyblue';
+const defaultChildElementCSSHeight = '100%';
 
 const getElement = query => {
   return document.getElementsByClassName(query)[0];
@@ -111,5 +113,31 @@ describe('the new DOM element created by a ScrollProgress instance', () => {
   });
   after(function() {
     getElement(defaultContainerClassName).remove();
+  });
+});
+
+describe('the child element, ' + defaultInnerChildClassName, () => {
+  before(function() {
+    new ScrollProgress('.some-container');
+  });
+  it(
+    'should have default CSS background-color: ' + defaultCSSBackgroundColor,
+    () => {
+      var elementPosition = getElement(defaultInnerChildClassName).style
+        .backgroundColor;
+      assert.equal(
+        elementPosition,
+        defaultCSSBackgroundColor,
+        `element's default CSS background-color property should be set to ${defaultCSSBackgroundColor}`
+      );
+    }
+  );
+  it(`should have default CSS height: ${defaultChildElementCSSHeight}`, () => {
+    var elementPosition = getElement(defaultInnerChildClassName).style.height;
+    assert.equal(
+      elementPosition,
+      defaultChildElementCSSHeight,
+      `element's default CSS width property should be set to ${defaultChildElementCSSHeight}`
+    );
   });
 });
